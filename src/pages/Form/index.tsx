@@ -35,7 +35,6 @@ const Tasks: React.FC = () => {
 
     async function submitTask(e: ChangeEvent<HTMLFormElement>) {   
         e.preventDefault();
-
         if(id) {
             const response = await api.put(`/task-update/${id}`, model);
         }

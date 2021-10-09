@@ -40,6 +40,10 @@ const Tasks: React.FC = () => {
         history.push(`/edit-task/${id}`);
     }
 
+    function detailTask(id: number) {
+        history.push(`/detail-task/${id}`);
+    }
+
     return (
         <div className="container">
             <br />
@@ -69,7 +73,7 @@ const Tasks: React.FC = () => {
                                 <td>
                                     <Button size="sm" onClick={() => {editTask(task.id)}}>Edit</Button>{' '}
                                     <Button size="sm" variant="success">Finish</Button>{' '}
-                                    <Button size="sm" variant="info">View</Button>{' '}
+                                    <Button size="sm" onClick={() => {detailTask(task.id)}} variant="info">View</Button>{' '}
                                     <Button size="sm" variant="danger">Delete</Button>{' '}
                                 </td>
                             </tr>
