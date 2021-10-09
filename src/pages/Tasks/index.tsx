@@ -44,6 +44,16 @@ const Tasks: React.FC = () => {
         history.push(`/detail-task/${id}`);
     }
 
+    async function finishTask(id: number) {
+       await api.put(`/task-finish/${id}`);
+       return loadTasks();
+    }
+
+    async function deleteTask(id: number) {
+        await api.delete(`/task-delete/${id}`);
+        return loadTasks();
+    }
+
     return (
         <div className="container">
             <br />
@@ -71,10 +81,10 @@ const Tasks: React.FC = () => {
                                 <td>{ task.finish ? "FINISHED" : "PENDING" }</td>
                                 <td>{ formatDate(task.updated_at) }</td>
                                 <td>
-                                    <Button size="sm" onClick={() => {editTask(task.id)}}>Edit</Button>{' '}
-                                    <Button size="sm" variant="success">Finish</Button>{' '}
+                                    <Button size="sm" onClick={() => {editTask(task.id)}} disabled={task.finish} >Edit</Button>{' '}
+                                    <Button size="sm" onClick={() => {finishTask(task.id)}} variant={task.finish ? "warning" : "success"}>{ task.finish ? "Pen..." : "Finish" }</Button>{' '}
                                     <Button size="sm" onClick={() => {detailTask(task.id)}} variant="info">View</Button>{' '}
-                                    <Button size="sm" variant="danger">Delete</Button>{' '}
+                                    <Button size="sm" onClick={() => {deleteTask(task.id)}} variant="danger">Delete</Button>{' '}
                                 </td>
                             </tr>
                         ))
